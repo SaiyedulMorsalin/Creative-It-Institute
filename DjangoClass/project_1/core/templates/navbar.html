@@ -1,11 +1,11 @@
 <div class="navbar bg-base-100">
-  <div class="flex-1">
+  <div class="flex-1 gap-2">
     <a class="btn btn-ghost text-xl">Our Students</a>
+    <button class="btn btn-outline btn-primary" onclick="my_modal_5.showModal()">Add Student</button>
+    {% comment %} <a class="btn btn-outline" href="{% url 'student_list' %}">Student List</a> {% endcomment %}
   </div>
   <div class="flex-none gap-2">
-    <div class="form-control">
-      <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
-    </div>
+    <div class="form-control"></div>
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">

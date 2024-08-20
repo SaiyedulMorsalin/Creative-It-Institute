@@ -9,32 +9,74 @@
 {% endblock %}
 
 {% block main_content %}
-  <div class="hero bg-base-200 min-h-screen">
-    <div class="hero-content text-center">
-      <div class="max-w-md">
-        <h1 class="text-5xl font-bold">Hello there</h1>
-        <p class="py-6">Add Student</p>
-        <button class="btn btn-primary" onclick="my_modal_5.showModal()">Add Student</button>
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+        <p class="font-bold">Error!</p>
+        <p class="block sm:inline">{{ error }}</p>
       </div>
-    </div>
-  </div>
+    {% endfor %}
+  {% endif %} {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+        <p class="font-bold">Error!</p>
+        <p class="block sm:inline">{{ error }}</p>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <button class="btn btn-primary" onclick="my_modal_5.showModal()">Add Student</button>
 
   <div class="md:container mx-auto"></div>
 
   <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
-      <h3 class="text-lg font-bold">Hello! @User</h3>
-      <p class="py-4">Please Added Student Information....</p>
+      <div class="text text-center">
+        <h3 class="text-lg font-bold">Hello! @User</h3>
+        <p class="py-4">Please Added Student Information....</p>
+      </div>
       <div class="modal-action">
-        <form class="space-y-3" method="POST" enctype="multipart/form-data">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 space-y-3" method="POST" enctype="multipart/form-data">
           {% csrf_token %}
-          {{ form }}
-          {% comment %} <input name="stu_roll" type="number" placeholder="Student Roll" class="input input-bordered input-primary w-full max-w-xs" />
-          <input name="stu_name" type="text" placeholder="Student Name" class="input input-bordered input-primary w-full max-w-xs" />
-          <input name="stu_dept" type="text" placeholder="Department" class="input input-bordered input-primary w-full max-w-xs" />
-          <input name="stu_img" type="file" class="file-input file-input-bordered file-input-primary w-full max-w-xs" /> {% endcomment %}
-          <button class="btn btn-outline btn-primary" type="submit">Submit</button>
-          <button class="btn">Close</button>
+          <div class="w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label> {{ form.name }} {% if form.name.errors %}
+              {% for error in form.name.errors %}
+                <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <div class="w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.roll.id_for_label }}">{{ form.roll.label }}</label> {{ form.roll }} {% if form.roll.errors %}
+              {% for error in form.roll.errors %}
+                <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <div class="w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.department.id_for_label }}">{{ form.department.label }}</label> {{ form.department }} {% if form.department.errors %}
+              {% for error in form.department.errors %}
+                <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <div class="w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.student_bio.id_for_label }}">{{ form.student_bio.label }}</label> {{ form.student_bio }} {% if form.student_bio.errors %}
+              {% for error in form.student_bio.errors %}
+                <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <div class="w-full px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.student_img.id_for_label }}">{{ form.student_img.label }}</label> {{ form.student_img }} {% if form.student_img.errors %}
+              {% for error in form.student_img.errors %}
+                <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+
+          <div class="flex justify-end items-center">
+            <button class="btn btn-outline btn-primary" type="submit">Submit</button>
+            <button class="btn">Close</button>
+          </div>
         </form>
       </div>
     </div>

@@ -9,5 +9,29 @@
 {% endblock %}
 
 {% block main_content %}
-  <h1>All Student List</h1>
+  <div class="md:container mx-auto my-10">
+    <h1 class="text-center">All Student List</h1>
+    <div class="container mx-auto">
+      <div class="grid grid-cols-12 gap-4">
+        {% for student in students %}
+          <div class="col-span-4">
+            <div class="card bg-base-100 w-60 shadow-xl">
+              <figure>
+                <img class="w-60 h-40" src="{{ student.student_img.url }}" alt="Shoes" />
+              </figure>
+              <div class="card-body">
+                <h2 class="text-xl font-bold">{{ student.name }}</h2>
+                <h3 class="text-lg font-semibold">Roll: {{ student.roll }}</h3>
+                <h3 class="text-lg font-semibold">Department: {{ student.department }}</h3>
+                <p class="text-base">{{ student.student_bio }}</p>
+                <div class="card-actions justify-end">
+                  <button class="btn btn-primary">Details</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 {% endblock %}
