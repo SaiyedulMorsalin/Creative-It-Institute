@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from address.models import PermanentAddress,PresentAddress
 from department.models import Department
 class TeacherProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name="teacher_user")
     bio = models.TextField()
     mobile_number = models.CharField(max_length=11)
     gender = models.CharField(max_length=10,choices=GENDER_TYPE)
