@@ -5,3 +5,4 @@ from django.shortcuts import render
 def student_register(request):
     if request.method == "POST":
         pass
+    return render(request, "student_register.html")

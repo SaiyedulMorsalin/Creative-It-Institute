@@ -1,0 +1,5 @@
+primaryColor = #00D27C
+secondaryColor = #00BFD2
+other = 	#0056D2
+otheer2 = 	#1300D2
+other3 = 	#7C00D2
