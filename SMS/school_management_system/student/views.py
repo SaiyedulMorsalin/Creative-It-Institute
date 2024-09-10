@@ -92,10 +92,10 @@ def activate(request, uid64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
-        return redirect("https://life-donors-frontend.vercel.app/login")
+        return redirect("student_profile")
     else:
 
-        return redirect("https://life-donors-frontend.vercel.app/register")
+        return redirect("student_profile")
 
 
 def user_login(request):
