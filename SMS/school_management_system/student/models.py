@@ -20,7 +20,11 @@ class StudentProfile(models.Model):
         max_length=15, choices=STUDENT_TYPE, blank=True, null=True
     )
     department = models.OneToOneField(
-        Department, on_delete=models.CASCADE, related_name="student_department"
+        Department,
+        on_delete=models.CASCADE,
+        related_name="student_department",
+        blank=True,
+        null=True,
     )
     registration_id = models.PositiveIntegerField(blank=True, null=True)
     secret_key = models.CharField(max_length=6, null=True, blank=True)
@@ -47,3 +51,6 @@ class StudentProfile(models.Model):
         null=True,
     )
     admission_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
