@@ -9,6 +9,9 @@ from django.contrib.auth.models import User
 from .models import StudentProfile
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 # Create your views here.
@@ -116,6 +119,7 @@ def user_login(request):
     return render(request, "index.html")
 
 
+@login_required(login_url="student_login")
 def user_logout(request):
 
     email_subject = "Security alert"
@@ -128,3 +132,31 @@ def user_logout(request):
         messages.error(request, "Email Verification Failed. Please try again.")
     logout(request)
     return redirect("student_login")
+
+
+@login_required(login_url="student_login")
+def change_password(request):
+    if request.method == "POST":
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+
+        if password1 == password2:
+            if len(password1) >= 8:
+                user = request.user
+
+                if user.check_password(password1):
+                    messages.error(
+                        request, "New password cannot be the same as the old password."
+                    )
+                else:
+                    user.set_password(password1)
+                    user.save()
+                    update_session_auth_hash(request, user)
+                    messages.success(request, "Your password was successfully updated!")
+                    return redirect("student_profile")
+            else:
+                messages.error(request, "Password must be at least 8 characters long.")
+        else:
+            messages.error(request, "Passwords do not match.")
+
+    return render(request, "change_password.html")
